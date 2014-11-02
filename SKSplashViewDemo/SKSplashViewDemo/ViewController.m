@@ -24,8 +24,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
     //Call the splash view example method to view the demo
-    [self customLoadSplash];
-    //[self twitterSplash];
+    [self twitterSplash];
 }
 
 - (void)didReceiveMemoryWarning {
