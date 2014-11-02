@@ -3,16 +3,20 @@ SKSplashView
 
 SKSplashView is a simple class to create beautiful animated splash views for transitioning between views. Perfect as a launch 
 screen while your app loads.
-The splash view allows you to create an animated background view with preset animations with the option of adding a splash icon 
+
+The splash view allows you to create an animated background view with preset animations with the option of adding a splash icon
 that will animate as long as the splash view is animating.
+
+ <img src = "https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px"> 
 
 <h1> Installation </h1>
 Adding SKSplashView to your project is super simple.
+
 Simply drag and drop the folder 'SKSplashView' and `#import SKSplashView.h` and you're ready to go.
 
 <h1> Implementation </h1>
 
-<h3> SKSplashView </h3>
+<h2> SKSplashView </h2>
 Simply create an instance of SKSplashView with the desired customizability option.
 ```
 SKSplashView *splashView = [[SKSplashView alloc] initWithBackgroundColor:[UIColor blueColor] animationType:SKSplashAnimationTypeZoom];
@@ -48,21 +52,25 @@ The Splash view also allows you to customize the animation transition of the spl
     SKSplashAnimationTypeCustom
 ```
 
-<h3> SKSplashIcon </h3>
+<h2> SKSplashIcon </h2>
 
 In addition to adding an animated splash view, you can also add an icon on your splash view with its own customizability options
 that will animate as long as the splash view is running.
 To add a splash icon to your splash view:
+
 1. `#import SKSplashIcon.h"` in the view you are presenting the splash view
+
 2. Initialize the splash view as follows:
   ```
   SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"test.png"] animationType:SKIconAnimationTypeNone]; 
   //Initialize with the customizability option of your choice. See Customizability for more.
   ```
 3. Add the splash icon when you are initializing your splash view
+
   ```
   SKSplashView *splashView = [SKSplashView alloc] initWithSplashIcon:snapchatSplashIcon backgroundColor:snapchatColor animationType:SKSplashAnimationTypeFade];
   ```
+
 You can also add the splash icon when initializing the splash view with the following methods:
 ```
 - (instancetype)initWithSplashIcon: (SKSplashIcon *)icon animationType: (SKSplashAnimationType) animationType;
@@ -98,17 +106,29 @@ To do this:
 - Add the following methods to listen to updates
   ```
 - (void) splashView:(SKSplashView *)splashView didBeginAnimatingWithDuration:(float)duration
-{
-    NSLog(@"Splash view started animating with duration %f", duration);
-}
+    {
+        NSLog(@"Splash view started animating with duration %f", duration);
+    }
 
 - (void) splashViewDidEndAnimating:(SKSplashView *)splashView
-{
-    NSLog(@"Splash view stopped animating");
-}
+    {
+        NSLog(@"Splash view stopped animating");
+    }
 ```
+
 <h1> Example </h1> 
+
+Some examples of splash views created using SKSplashView (Twitter iOS app and Ping iOS app). All code to the examples is available in the <a href = https://github.com/sachinkesiraju/SKSplashView/tree/master/SKSplashViewDemo> Demo. </a>
+If you found a way to mimick another popular iOS app's splash view using SKSplashView, let <a href = "https://twitter.com/sachinkesiraju"> me </a> know so I can add it here.
+
+<img src = "https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px"><img src="https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/ping.gif" width = "320px"> 
+
 For more help getting started with SKSplashView, check out the <a href = https://github.com/sachinkesiraju/SKSplashView/tree/master/SKSplashViewDemo> Demo </a>
 
+<h1> Community </h1>
+If you feel you can improve or add more customizability to SKSplashView, feel free to raise an issue/submit a PR.
+
+For any questions, reach out to me on Twitter <a href = "https://twitter.com/sachinkesiraju"> @sachinkesiraju </a>
+
 <h1> License </h1>
-SKSplashView is available under the MIT License. See the <a href= https://github.com/sachinkesiraju/SKSplashView/blob/master/LICENSE> License </a> for more info.
+SKSplashView is available under the MIT License. See the <a href= https://github.com/sachinkesiraju/SKSplashView/blob/master/LICENSE> LICENSE </a> for more info.
