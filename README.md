@@ -10,9 +10,13 @@ that will animate as long as the splash view is animating.
  <img src = "https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px"> 
 
 <h1> Installation </h1>
-Adding SKSplashView to your project is super simple.
-
-Simply drag and drop the folder 'SKSplashView' and `#import SKSplashView.h` and you're ready to go.
+<h3> Cocoapods </h3>
+SKSplashView is available through <a href = "cocoapods.org"> Cocoapods</a>. To install it, simply add the following to your Podfile.
+```
+pod "SKSplashView"
+```
+<h3> Alternative </h3>
+If installation through Cocoapods doesn't work or if you aren't comfortable using it, you can always just drag and drop the folder 'SKSplashView' into your project and ``#import SKSplashView.h`` and you're ready to go.
 
 <h1> Implementation </h1>
 
