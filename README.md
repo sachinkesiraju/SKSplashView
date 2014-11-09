@@ -13,7 +13,7 @@ that will animate as long as the splash view is animating.
 <h3> Cocoapods </h3>
 SKSplashView is available through <a href = "cocoapods.org"> Cocoapods</a>. To install it, simply add the following to your Podfile.
 ```
-pod "SKSplashView"
+pod 'SKSplashView'
 ```
 <h3> Alternative </h3>
 If installation through Cocoapods doesn't work or if you aren't comfortable using it, you can always just drag and drop the folder 'SKSplashView' into your project and ``#import SKSplashView.h`` and you're ready to go.
@@ -125,7 +125,7 @@ To do this:
 Some examples of splash views created using SKSplashView (Twitter iOS app and Ping iOS app). All code to the examples is available in the <a href = https://github.com/sachinkesiraju/SKSplashView/tree/master/SKSplashViewDemo> Demo. </a>
 If you found a way to mimick another popular iOS app's splash view using SKSplashView, let <a href = "https://twitter.com/sachinkesiraju"> me </a> know so I can add it here.
 
-<img src = "https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px"><img src="https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/ping.gif" width = "320px"> 
+<img src = "https://github.com/sachinkesiraju/SKSplashView/raw/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px" height = "568"/> <img src="https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/ping.gif" width = "320px" height = "568"/> 
 
 For more help getting started with SKSplashView, check out the <a href = https://github.com/sachinkesiraju/SKSplashView/tree/master/SKSplashViewDemo> Demo </a>
 
