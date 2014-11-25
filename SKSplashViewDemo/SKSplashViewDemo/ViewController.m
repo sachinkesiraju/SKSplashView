@@ -96,6 +96,17 @@
     [_splashView startAnimation];
 }
 
+#pragma mark - Animation Examples
+
+- (void) fadeExampleSplash
+{
+    SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"white dot.png"] animationType:SKIconAnimationTypeBlink];
+    _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:[UIColor blackColor] animationType:SKSplashAnimationTypeFade];
+    _splashView.animationDuration = 7;
+    [self.view addSubview:_splashView];
+    [_splashView startAnimation];
+}
+
 #pragma mark - Delegate methods
 
 - (void) splashView:(SKSplashView *)splashView didBeginAnimatingWithDuration:(float)duration

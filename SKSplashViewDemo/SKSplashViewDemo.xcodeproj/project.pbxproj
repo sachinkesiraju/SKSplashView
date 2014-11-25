@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033B09B81A24F7220067C24C /* white dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 033B09B71A24F7220067C24C /* white dot.png */; };
 		03D562DE1A0570EF003C6A7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562DD1A0570EF003C6A7C /* main.m */; };
 		03D562E11A0570EF003C6A7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562E01A0570EF003C6A7C /* AppDelegate.m */; };
 		03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D562E51A0570EF003C6A7C /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		033B09B71A24F7220067C24C /* white dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white dot.png"; sourceTree = "<group>"; };
 		03D562D81A0570EF003C6A7C /* SKSplashViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKSplashViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D562DC1A0570EF003C6A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03D562DD1A0570EF003C6A7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		03D563041A05713D003C6A7C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				033B09B71A24F7220067C24C /* white dot.png */,
 				03D563051A05713D003C6A7C /* ping background.PNG */,
 				03D563061A05713D003C6A7C /* ping.png */,
 				03D563071A05713D003C6A7C /* snapchat icon.png */,
@@ -245,6 +248,7 @@
 				03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */,
 				03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */,
 				03D562EC1A0570EF003C6A7C /* LaunchScreen.xib in Resources */,
+				033B09B81A24F7220067C24C /* white dot.png in Resources */,
 				03D562E91A0570EF003C6A7C /* Images.xcassets in Resources */,
 				03D5630E1A05713D003C6A7C /* twitterIcon.png in Resources */,
 				03D5630D1A05713D003C6A7C /* twitter background.png in Resources */,
