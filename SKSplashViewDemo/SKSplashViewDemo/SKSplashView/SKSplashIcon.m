@@ -27,9 +27,9 @@
     if(self)
     {
         self.image = iconImage;
-        self.tintColor = [self iconStartColor];
+        self.tintColor = [self setIconStartColor];
         self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, [self iconStartSize].width, [self iconStartSize].height);
+        self.frame = CGRectMake(0, 0, [self setIconStartSize].width, [self setIconStartSize].height);
         [self addObserverForAnimationNotification];
     }
     
@@ -45,9 +45,9 @@
         _iconImage = iconImage;
         self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.image = iconImage;
-        self.tintColor = [self iconStartColor];
+        self.tintColor = [self setIconStartColor];
         self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, [self iconStartSize].width, [self iconStartSize].height);
+        self.frame = CGRectMake(0, 0, [self setIconStartSize].width, [self setIconStartSize].height);
         [self addObserverForAnimationNotification];
     }
     
@@ -69,7 +69,7 @@
 
 #pragma mark - Property setters
 
-- (CGSize)iconStartSize
+- (CGSize)setIconStartSize
 {
     if (!_iconSize.height) {
         _iconSize = CGSizeMake(60, 60);
@@ -77,7 +77,7 @@
     return _iconSize;
 }
 
-- (UIColor *)iconStartColor
+- (UIColor *)setIconStartColor
 {
     if (!_iconColor) {
         _iconColor = [UIColor whiteColor];

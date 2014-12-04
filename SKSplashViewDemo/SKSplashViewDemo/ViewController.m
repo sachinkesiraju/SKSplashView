@@ -102,7 +102,7 @@
 {
     SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"white dot.png"] animationType:SKIconAnimationTypeBlink];
     _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:[UIColor blackColor] animationType:SKSplashAnimationTypeFade];
-    _splashView.animationDuration = 7;
+    _splashView.animationDuration = 5;
     [self.view addSubview:_splashView];
     [_splashView startAnimation];
 }
