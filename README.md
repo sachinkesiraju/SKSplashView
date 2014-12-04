@@ -16,7 +16,7 @@ SKSplashView is available through <a href = "cocoapods.org"> Cocoapods</a>. To i
 pod 'SKSplashView'
 ```
 <h3> Alternative </h3>
-If installation through Cocoapods doesn't work or if you aren't comfortable using it, you can always just drag and drop the folder 'SKSplashView' into your project and ``#import SKSplashView.h`` and you're ready to go.
+If installation through Cocoapods doesn't work or if you aren't comfortable using it, you can always just drag and drop the folder 'SKSplashView' into your project and ``#import "SKSplashView.h"`` and you're ready to go.
 
 <h1> Implementation </h1>
 
@@ -62,7 +62,7 @@ In addition to adding an animated splash view, you can also add an icon on your 
 that will animate as long as the splash view is running.
 To add a splash icon to your splash view:
 
-1. `#import SKSplashIcon.h"` in the view you are presenting the splash view
+1. `#import "SKSplashIcon.h"` in the view you are presenting the splash view
 
 2. Initialize the splash view as follows:
   ```
@@ -72,7 +72,7 @@ To add a splash icon to your splash view:
 3. Add the splash icon when you are initializing your splash view
 
   ```
-  SKSplashView *splashView = [SKSplashView alloc] initWithSplashIcon:snapchatSplashIcon backgroundColor:snapchatColor animationType:SKSplashAnimationTypeFade];
+  SKSplashView *splashView = [SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:splashColor animationType:SKSplashAnimationTypeFade];
   ```
 
 You can also add the splash icon when initializing the splash view with the following methods:
