@@ -38,7 +38,7 @@
     if(self)
     {
         _backgroundViewColor = backgroundColor;
-        self.backgroundColor = backgroundColor;
+        self.backgroundColor = [self setBackgroundViewColor];
         _animationType = animationType;
     }
     

@@ -224,23 +224,19 @@
 - (void) removeAnimations
 {
     [self.layer removeAllAnimations];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
 
 - (void) addNoAnimation
 {
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeSplashView) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
 }
 
 - (void) addCustomAnimation: (CAAnimation *) animation
 {
     [self.layer addAnimation:animation forKey:@"SKSplashAnimation"];
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeSplashView) userInfo:nil repeats:YES];
-}
-
-- (void) removeSplashView
-{
-    [self removeFromSuperview];
+    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
 }
 
 @end

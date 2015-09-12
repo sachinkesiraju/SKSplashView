@@ -62,7 +62,7 @@
     UIColor *twitterColor = [UIColor colorWithRed:0.25098 green:0.6 blue:1.0 alpha:1.0];
     _splashView = [[SKSplashView alloc] initWithSplashIcon:twitterSplashIcon backgroundColor:twitterColor animationType:SKSplashAnimationTypeNone];
     _splashView.delegate = self; //Optional -> if you want to receive updates on animation beginning/end
-    _splashView.animationDuration = 2; //Optional -> set animation duration. Default: 1s
+    _splashView.animationDuration = 3; //Optional -> set animation duration. Default: 1s
     [self.view addSubview:_splashView];
     [_splashView startAnimation];
 }
