@@ -108,7 +108,7 @@ To do this:
 - Set the delegate to your splash view
   `splashView.delegate = self;`
 - Add the following methods to listen to updates
-  ```
+```
 - (void) splashView:(SKSplashView *)splashView didBeginAnimatingWithDuration:(float)duration
     {
         NSLog(@"Splash view started animating with duration %f", duration);
@@ -127,7 +127,7 @@ By simply calling:
 ```
 with an initialized splash view, the splash animation will repeat until you've downloaded everything you need to get started!
 
-<i> Note: This feature currently does not allow animation of the splash view itself but allows for certain splash icon animations. <i>
+<i> Note: This feature currently does not allow animation of the splash view itself but allows for certain splash icon animations. </i>
 
 <h1> Example </h1> 
 
