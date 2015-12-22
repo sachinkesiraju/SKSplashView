@@ -47,5 +47,6 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
 - (void) setCustomAnimationType: (CAAnimation *) animation;
 
 - (void)startAnimation;
+- (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion;
 
 @end

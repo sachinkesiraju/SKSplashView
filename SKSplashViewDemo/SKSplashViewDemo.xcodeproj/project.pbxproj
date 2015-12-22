@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032E70BD1C2945A2004D4542 /* uber screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70BC1C2945A2004D4542 /* uber screen.png */; };
+		032E70BF1C29465D004D4542 /* uber ping.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70BE1C29465D004D4542 /* uber ping.png */; };
+		032E70C31C294A4A004D4542 /* uber map screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70C21C294A4A004D4542 /* uber map screenshot.png */; };
 		033B09B81A24F7220067C24C /* white dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 033B09B71A24F7220067C24C /* white dot.png */; };
 		03D562DE1A0570EF003C6A7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562DD1A0570EF003C6A7C /* main.m */; };
 		03D562E11A0570EF003C6A7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562E01A0570EF003C6A7C /* AppDelegate.m */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032E70BC1C2945A2004D4542 /* uber screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber screen.png"; sourceTree = "<group>"; };
+		032E70BE1C29465D004D4542 /* uber ping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber ping.png"; sourceTree = "<group>"; };
+		032E70C21C294A4A004D4542 /* uber map screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber map screenshot.png"; sourceTree = "<group>"; };
 		033B09B71A24F7220067C24C /* white dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white dot.png"; sourceTree = "<group>"; };
 		03D562D81A0570EF003C6A7C /* SKSplashViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKSplashViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D562DC1A0570EF003C6A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,7 +148,10 @@
 		03D563041A05713D003C6A7C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				032E70C21C294A4A004D4542 /* uber map screenshot.png */,
+				032E70BC1C2945A2004D4542 /* uber screen.png */,
 				033B09B71A24F7220067C24C /* white dot.png */,
+				032E70BE1C29465D004D4542 /* uber ping.png */,
 				03D563051A05713D003C6A7C /* ping background.PNG */,
 				03D563061A05713D003C6A7C /* ping.png */,
 				03D563071A05713D003C6A7C /* snapchat icon.png */,
@@ -207,7 +216,7 @@
 		03D562D01A0570EF003C6A7C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Sachin Kesiraju";
 				TargetAttributes = {
 					03D562D71A0570EF003C6A7C = {
@@ -243,15 +252,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032E70C31C294A4A004D4542 /* uber map screenshot.png in Resources */,
 				03D5630A1A05713D003C6A7C /* ping background.PNG in Resources */,
 				03D5630B1A05713D003C6A7C /* ping.png in Resources */,
 				03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */,
 				03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */,
 				03D562EC1A0570EF003C6A7C /* LaunchScreen.xib in Resources */,
 				033B09B81A24F7220067C24C /* white dot.png in Resources */,
+				032E70BD1C2945A2004D4542 /* uber screen.png in Resources */,
 				03D562E91A0570EF003C6A7C /* Images.xcassets in Resources */,
 				03D5630E1A05713D003C6A7C /* twitterIcon.png in Resources */,
 				03D5630D1A05713D003C6A7C /* twitter background.png in Resources */,
+				032E70BF1C29465D004D4542 /* uber ping.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +347,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -396,7 +409,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SKSplashViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sachin.Kesiraju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -406,7 +421,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SKSplashViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sachin.Kesiraju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -425,6 +442,7 @@
 				);
 				INFOPLIST_FILE = SKSplashViewDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sachin.Kesiraju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SKSplashViewDemo.app/SKSplashViewDemo";
 			};
@@ -440,6 +458,7 @@
 				);
 				INFOPLIST_FILE = SKSplashViewDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sachin.Kesiraju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SKSplashViewDemo.app/SKSplashViewDemo";
 			};

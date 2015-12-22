@@ -13,6 +13,7 @@
 @property (nonatomic, assign) SKIconAnimationType animationType;
 @property (strong, nonatomic) CAAnimation *customAnimation;
 @property (nonatomic) CGFloat animationDuration;
+@property (nonatomic) BOOL indefiniteAnimation;
 @property (strong, nonatomic) UIImage *iconImage;
 
 @end
@@ -29,7 +30,7 @@
         self.image = iconImage;
         self.tintColor = [self setIconStartColor];
         self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, [self setIconStartSize].width, [self setIconStartSize].height);
+        self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
     }
     
@@ -47,7 +48,7 @@
         self.image = iconImage;
         self.tintColor = [self setIconStartColor];
         self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, [self setIconStartSize].width, [self setIconStartSize].height);
+        self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
     }
     
@@ -90,16 +91,25 @@
 - (void) addObserverForAnimationNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"startAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"stopAnimation" object:nil];
 }
 
 - (void) receiveNotification: (NSNotification *) notification
 {
-    if(notification.userInfo [@"animationDuration"])
-    {
-        double duration = [notification.userInfo [@"animationDuration"] doubleValue];
-        self.animationDuration = duration;
+    if([notification.name isEqualToString:@"startAnimation"]) { //if start animation, set duration if any
+        if(notification.userInfo [@"animationDuration"]){
+            double duration = [notification.userInfo [@"animationDuration"] doubleValue];
+            self.animationDuration = duration;
+            [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
+        }
+        else {
+            self.indefiniteAnimation = YES;
+        }
+        [self startAnimation];
     }
-    [self startAnimation];
+    else if([notification.name isEqualToString:@"stopAnimation"]) {
+        [self removeAnimations];
+    }
 }
 
 - (void) startAnimation
@@ -128,12 +138,10 @@
             [self addNoAnimation];
             break;
         case SKIconAnimationTypeCustom:
-            if(_customAnimation)
-            {
+            if(_customAnimation) {
                 [self addCustomAnimation:_customAnimation];
             }
-            else
-            {
+            else {
                 [self addCustomAnimation:[self customAnimation]];
             }
             break;
@@ -194,7 +202,6 @@
 
 - (void) addPingAnimation
 {
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
     [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionRepeat) animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
         self.transform = scaleTransform;
@@ -205,12 +212,15 @@
              self.transform = scaleTransform;
          }];
      }];
+    
+    if(self.indefiniteAnimation){ //keep running animation indefinitely
+        [self performSelectorOnMainThread:@selector(addPingAnimation) withObject:nil waitUntilDone:NO];
+    }
 }
 
 - (void) addBlinkAnimation
 {
     self.alpha = 0;
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
     [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionRepeat) animations:^{
         self.alpha = 1;
     }completion:^(BOOL finished)
@@ -219,11 +229,16 @@
              self.alpha = 0;
          }];
      }];
+    
+    if(self.indefiniteAnimation){ //keep running animation indefinitely
+        [self performSelectorOnMainThread:@selector(addBlinkAnimation) withObject:nil waitUntilDone:NO];
+    }
 }
 
 - (void) removeAnimations
 {
     [self.layer removeAllAnimations];
+    self.indefiniteAnimation = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
