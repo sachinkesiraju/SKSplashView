@@ -119,11 +119,20 @@ To do this:
         NSLog(@"Splash view stopped animating");
     }
 ```
+<h1> Special Feature </h1>
+SKSplashView also allows you to run a splash animation while executing a network request. This is ideal in situations where your app takes time during launch to download necessary data.
+By simply calling:
+```
+[splashView startAnimationWhileExecuting:request withCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {}];
+```
+with an initialized splash view, the splash animation will repeat until you've downloaded everything you need to get started!
+
+<i> Note: This feature currently does not allow animation of the splash view itself but allows for certain splash icon animations. <i>
 
 <h1> Example </h1> 
 
 Some examples of splash views created using SKSplashView (Twitter iOS app and Ping iOS app). All code to the examples is available in the <a href = https://github.com/sachinkesiraju/SKSplashView/tree/master/SKSplashViewDemo> Demo. </a>
-If you found a way to mimick another popular iOS app's splash view using SKSplashView, let <a href = "https://twitter.com/sachinkesiraju"> me </a> know so I can add it here.
+If you found a way to mimic another popular iOS app's splash view using SKSplashView, let <a href = "https://twitter.com/_sachink"> me </a> know so I can add it here.
 
 <img src = "https://github.com/sachinkesiraju/SKSplashView/raw/master/SKSplashViewDemo/Example%20GIFs/twitter.gif" width = "320px" height = "568"/> <img src="https://github.com/sachinkesiraju/SKSplashView/blob/master/SKSplashViewDemo/Example%20GIFs/ping.gif" width = "320px" height = "568"/> 
 
@@ -132,7 +141,7 @@ For more help getting started with SKSplashView, check out the <a href = https:/
 <h1> Community </h1>
 If you feel you can improve or add more customizability to SKSplashView, feel free to raise an issue/submit a PR.
 
-For any questions, reach out to me on Twitter <a href = "https://twitter.com/sachinkesiraju"> @sachinkesiraju </a>
+For any questions, reach out to me on Twitter <a href = "https://twitter.com/_sachink"> @sachinkesiraju </a>
 
 <h1> License </h1>
 SKSplashView is available under the MIT License. See the <a href= https://github.com/sachinkesiraju/SKSplashView/blob/master/LICENSE> LICENSE </a> for more info.
