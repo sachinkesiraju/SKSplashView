@@ -9,7 +9,7 @@
 #import "SKSplashView.h"
 #import "SKSplashIcon.h"
 
-@interface SKSplashView()
+@interface SKSplashView() <NSURLConnectionDataDelegate>
 
 @property (nonatomic, assign) SKSplashAnimationType animationType;
 @property (nonatomic, assign) SKSplashIcon *splashIcon;
@@ -102,6 +102,7 @@
         imageView.frame = self.bounds;
         [self addSubview:imageView];
         [self addSubview:icon];
+        icon.center = imageView.center;
     }
     return self;
 }
@@ -110,8 +111,7 @@
 
 - (void)startAnimation;
 {
-    if(_splashIcon)
-    {
+    if(_splashIcon) {
         NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%f",self.animationDuration] forKey:@"animationDuration"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:dic];
     }
@@ -138,18 +138,35 @@
             [self addNoAnimation];
             break;
         case SKSplashAnimationTypeCustom:
-            if(_animationType)
-            {
+            if(_animationType) {
                 [self addCustomAnimationWithAnimation:_customAnimation];
             }
-            else
-            {
+            else {
                 [self addCustomAnimationWithAnimation:[self customAnimation]];
             }
             break;
         default:NSLog(@"No animation type selected");
             break;
     }
+}
+
+- (void) startAnimationWhileExecuting:(NSURLRequest *)request withCompletion:(void (^)(NSData *, NSURLResponse *, NSError *))completion
+{
+    if(_splashIcon) { //trigger splash icon animation
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:nil];
+    }
+    
+    if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)])
+    {
+        [self.delegate splashView:self didBeginAnimatingWithDuration:self.animationDuration];
+    }
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil]; //remove animation on data retrieval
+         [self removeSplashView];
+         completion(data, response, error);
+     }];
 }
 
 - (void) setCustomAnimationType:(CAAnimation *)animation
@@ -215,8 +232,7 @@
         self.alpha = 0;
         self.backgroundColor = [UIColor blackColor];
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        [self endAnimating];
+        [self removeSplashView];
     }];
 }
 
@@ -228,8 +244,7 @@
         self.transform = scaleTransform;
         self.alpha = 0;
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        [self endAnimating];
+        [self removeSplashView];
     }];
 }
 
@@ -238,8 +253,7 @@
     [UIView animateWithDuration:self.animationDuration animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        [self endAnimating];
+        [self removeSplashView];
     }];
 
 }
@@ -252,8 +266,7 @@
         self.alpha = 0;
     }completion:^(BOOL finished)
      {
-         [self removeFromSuperview];
-         [self endAnimating];
+         [self removeSplashView];
      }];
 }
 
@@ -264,8 +277,7 @@
         self.transform = scaleTransform;
         self.alpha = 0;
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        [self endAnimating];
+        [self removeSplashView];
     }];
 }
 
