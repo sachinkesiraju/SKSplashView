@@ -127,6 +127,8 @@ By simply calling:
 ```
 with an initialized splash view, the splash animation will repeat until you've downloaded everything you need to get started!
 
+<img src = "https://github.com/sachinkesiraju/SKSplashView/raw/master/SKSplashViewDemo/Example%20GIFs/uber.gif" width = "320px" height = "568"/>
+
 <i> Note: This feature currently does not allow animation of the splash view itself but allows for certain splash icon animations. </i>
 
 <h1> Example </h1> 
