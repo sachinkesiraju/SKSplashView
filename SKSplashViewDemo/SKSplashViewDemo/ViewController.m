@@ -24,8 +24,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
     //Call the splash view example method to view the demo
-    //[self twitterSplash];
-    [self concurrentAnimation];
+    //[self pingSplash];
+    [self uberAnimation]; //make sure you don't call two animation splashes at once
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,7 +110,7 @@
 
 #pragma mark - Concurrent Network Animation
 
-- (void) concurrentAnimation
+- (void) uberAnimation
 {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uber map screenshot.png"]];
     imageView.frame = self.view.frame;

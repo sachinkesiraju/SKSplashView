@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, SKIconAnimationType)
     SKIconAnimationTypeGrow,
     SKIconAnimationTypeShrink,
     SKIconAnimationTypeFade,
-    SKIconAnimationTypePing, 
-    SKIconAnimationTypeBlink,
+    SKIconAnimationTypePing, //supports network dependent animation
+    SKIconAnimationTypeBlink, //supports network dependent animation
     SKIconAnimationTypeNone,
     SKIconAnimationTypeCustom
 };
