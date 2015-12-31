@@ -24,8 +24,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
     //Call the splash view example method to view the demo
-    //[self pingSplash];
-    [self uberAnimation]; //make sure you don't call two animation splashes at once
+    [self twitterSplash];
+    //[self uberAnimation]; //make sure you don't call two animation splashes at once
 }
 
 - (void)didReceiveMemoryWarning {
