@@ -118,13 +118,15 @@
     SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"uber ping.png"] animationType:SKIconAnimationTypePing];
     SKSplashView *splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundImage:[UIImage imageNamed:@"uber screen.png"] animationType:SKSplashAnimationTypeNone];
     [self.view addSubview:splashView];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.usda.gov/data.json"]]; //enter the url you want to download data for launch from
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.usda.gov/data.json"]]; //replace with url you want to download data for launch from
     [splashView startAnimationWhileExecuting:request withCompletion:^(NSData *data, NSURLResponse *response, NSError *error)
      {
-        //got data from request, parsing it
-        NSError *jsonError = nil;
-        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
-        NSLog(@"Got some lovely data while splash animation was running 👍 %@", responseDict);
+         if(!error) {
+             //got data from request, parsing it
+             NSError *jsonError = nil;
+             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+             NSLog(@"Got everything I needed while splash animation was running 👍 %@", responseDict);
+         }
      }];
 }
 

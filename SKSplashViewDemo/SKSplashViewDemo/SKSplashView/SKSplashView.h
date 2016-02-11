@@ -47,6 +47,6 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
 - (void) setCustomAnimationType: (CAAnimation *) animation;
 
 - (void)startAnimation;
-- (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion;
+- (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion; //NOTE: Splash View returns regardless of whether request was success -> error handling highly recommended
 
 @end
