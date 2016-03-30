@@ -22,26 +22,22 @@
 
 #pragma mark - Initialization
 
-- (instancetype) initWithImage:(UIImage *)iconImage
-{
+- (instancetype)initWithImage:(UIImage *)iconImage{
     self = [super init];
-    if(self)
-    {
+    if(self){
         self.image = iconImage;
         self.tintColor = [self setIconStartColor];
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
     }
-    
+
     return self;
 }
 
-- (instancetype) initWithImage:(UIImage *)iconImage animationType:(SKIconAnimationType)animationType
-{
+- (instancetype)initWithImage:(UIImage *)iconImage animationType:(SKIconAnimationType)animationType{
     self = [super init];
-    if(self)
-    {
+    if(self){
         _animationType = animationType;
         _iconImage = iconImage;
         self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -51,35 +47,31 @@
         self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
     }
-    
+
     return self;
 }
 
 #pragma mark - Public methods
 
-- (void) setIconAnimationType:(SKIconAnimationType)animationType
-{
- 
+- (void)setIconAnimationType:(SKIconAnimationType)animationType{
+
     _animationType = animationType;
 }
 
-- (void) setCustomAnimation:(CAAnimation *)animation
-{
+- (void) setCustomAnimation:(CAAnimation *)animation{
     _customAnimation = animation;
 }
 
 #pragma mark - Property setters
 
-- (CGSize)setIconStartSize
-{
+- (CGSize)setIconStartSize{
     if (!_iconSize.height) {
         _iconSize = CGSizeMake(60, 60);
     }
     return _iconSize;
 }
 
-- (UIColor *)setIconStartColor
-{
+- (UIColor *)setIconStartColor{
     if (!_iconColor) {
         _iconColor = [UIColor whiteColor];
     }
@@ -88,14 +80,12 @@
 
 #pragma mark - Implementation
 
-- (void) addObserverForAnimationNotification
-{
+- (void) addObserverForAnimationNotification{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"startAnimation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"stopAnimation" object:nil];
 }
 
-- (void) receiveNotification: (NSNotification *) notification
-{
+- (void) receiveNotification: (NSNotification *) notification{
     if([notification.name isEqualToString:@"startAnimation"]) { //if start animation, set duration if any
         if(notification.userInfo [@"animationDuration"]){
             double duration = [notification.userInfo [@"animationDuration"] doubleValue];
@@ -112,10 +102,8 @@
     }
 }
 
-- (void) startAnimation
-{
-    switch (_animationType)
-    {
+- (void) startAnimation{
+    switch (_animationType){
         case SKIconAnimationTypeBounce:
             [self addBounceAnimation];
             break;
@@ -150,11 +138,10 @@
     }
 }
 
-- (void) addBounceAnimation
-{
+- (void)addBounceAnimation{
     CGFloat shrinkDuration = self.animationDuration * 0.3;
     CGFloat growDuration = self.animationDuration * 0.7;
-    
+
     [UIView animateWithDuration:shrinkDuration delay:0 usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
         self.transform = scaleTransform;
@@ -169,8 +156,7 @@
     }];
 }
 
-- (void) addFadeAnimation
-{
+- (void)addFadeAnimation{
     [UIView animateWithDuration:self.animationDuration animations:^{
         self.image = _iconImage;
         self.alpha = 0;
@@ -179,8 +165,7 @@
     }];
 }
 
-- (void) addGrowAnimation
-{
+- (void)addGrowAnimation{
     [UIView animateWithDuration:self.animationDuration animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(20, 20);
         self.transform = scaleTransform;
@@ -189,8 +174,7 @@
     }];
 }
 
-- (void) addShrinkAnimation
-{
+- (void)addShrinkAnimation{
     [UIView animateWithDuration:self.animationDuration delay:0 usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
         self.transform = scaleTransform;
@@ -200,8 +184,7 @@
      }];
 }
 
-- (void) addPingAnimation
-{
+- (void)addPingAnimation{
     [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionRepeat) animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
         self.transform = scaleTransform;
@@ -212,14 +195,13 @@
              self.transform = scaleTransform;
          }];
      }];
-    
+
     if(self.indefiniteAnimation){ //keep running animation indefinitely
         [self performSelectorOnMainThread:@selector(addPingAnimation) withObject:nil waitUntilDone:NO];
     }
 }
 
-- (void) addBlinkAnimation
-{
+- (void)addBlinkAnimation{
     self.alpha = 0;
     [UIView animateWithDuration:1.5 delay:0 options:(UIViewAnimationOptionRepeat) animations:^{
         self.alpha = 1;
@@ -229,29 +211,30 @@
              self.alpha = 0;
          }];
      }];
-    
+
     if(self.indefiniteAnimation){ //keep running animation indefinitely
         [self performSelectorOnMainThread:@selector(addBlinkAnimation) withObject:nil waitUntilDone:NO];
     }
 }
 
-- (void) removeAnimations
-{
+- (void)removeAnimations{
     [self.layer removeAllAnimations];
     self.indefiniteAnimation = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
 
-- (void) addNoAnimation
-{
+- (void) addNoAnimation{
     [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
 }
 
-- (void) addCustomAnimation: (CAAnimation *) animation
-{
+- (void)addCustomAnimation:(CAAnimation *)animation{
     [self.layer addAnimation:animation forKey:@"SKSplashAnimation"];
     [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 @end
