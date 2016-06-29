@@ -16,7 +16,6 @@
 @optional
 - (void) splashView: (SKSplashView *) splashView didBeginAnimatingWithDuration: (float) duration;
 - (void) splashViewDidEndAnimating: (SKSplashView *) splashView;
-
 @end
 
 typedef NS_ENUM(NSInteger, SKSplashAnimationType)

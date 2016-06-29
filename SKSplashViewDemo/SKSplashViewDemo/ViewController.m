@@ -63,20 +63,7 @@
     UIColor *twitterColor = [UIColor colorWithRed:0.25098 green:0.6 blue:1.0 alpha:1.0];
     _splashView = [[SKSplashView alloc] initWithSplashIcon:twitterSplashIcon backgroundColor:twitterColor animationType:SKSplashAnimationTypeNone];
     _splashView.delegate = self; //Optional -> if you want to receive updates on animation beginning/end
-    _splashView.animationDuration = 3; //Optional -> set animation duration. Default: 1s
-    [self.view addSubview:_splashView];
-    [_splashView startAnimation];
-}
-
-#pragma mark - Snapchat Example
-
-- (void) snapchatSplash
-{
-    //Snapchat style splash
-    SKSplashIcon *snapchatSplashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"snapchat icon.png"] animationType:SKIconAnimationTypeNone];
-    UIColor *snapchatColor = [UIColor colorWithRed:255 green:252 blue:0 alpha:1];
-    _splashView = [[SKSplashView alloc] initWithSplashIcon:snapchatSplashIcon backgroundColor:snapchatColor animationType:SKSplashAnimationTypeFade];
-    _splashView.animationDuration = 3.0f;
+    _splashView.animationDuration = 3.2; //Optional -> set animation duration. Default: 1s
     [self.view addSubview:_splashView];
     [_splashView startAnimation];
 }
@@ -130,7 +117,7 @@
      }];
 }
 
-#pragma mark - Delegate methods
+#pragma mark - Delegate methods (Optional)
 
 - (void) splashView:(SKSplashView *)splashView didBeginAnimatingWithDuration:(float)duration
 {

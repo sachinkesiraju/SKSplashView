@@ -20,15 +20,16 @@
 
 @implementation SKSplashIcon
 
+@dynamic animationDuration;
+
 #pragma mark - Initialization
 
 - (instancetype) initWithImage:(UIImage *)iconImage
 {
     self = [super init];
-    if(self)
-    {
+    if(self) {
         self.image = iconImage;
-        self.tintColor = [self setIconStartColor];
+        self.tintColor = _iconColor;
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
@@ -40,13 +41,12 @@
 - (instancetype) initWithImage:(UIImage *)iconImage animationType:(SKIconAnimationType)animationType
 {
     self = [super init];
-    if(self)
-    {
+    if(self) {
         _animationType = animationType;
         _iconImage = iconImage;
         self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.image = iconImage;
-        self.tintColor = [self setIconStartColor];
+        self.tintColor = _iconColor;
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
         [self addObserverForAnimationNotification];
@@ -55,11 +55,8 @@
     return self;
 }
 
-#pragma mark - Public methods
-
 - (void) setIconAnimationType:(SKIconAnimationType)animationType
 {
- 
     _animationType = animationType;
 }
 
@@ -68,9 +65,7 @@
     _customAnimation = animation;
 }
 
-#pragma mark - Property setters
-
-- (CGSize)setIconStartSize
+- (CGSize)iconSize
 {
     if (!_iconSize.height) {
         _iconSize = CGSizeMake(60, 60);
@@ -78,7 +73,7 @@
     return _iconSize;
 }
 
-- (UIColor *)setIconStartColor
+- (UIColor *)iconColor
 {
     if (!_iconColor) {
         _iconColor = [UIColor whiteColor];
@@ -138,24 +133,22 @@
             [self addNoAnimation];
             break;
         case SKIconAnimationTypeCustom:
-            if(_customAnimation) {
-                [self addCustomAnimation:_customAnimation];
-            }
-            else {
-                [self addCustomAnimation:[self customAnimation]];
-            }
+            [self addCustomAnimation:_customAnimation];
             break;
         default:NSLog(@"No animation type selected");
             break;
     }
 }
 
+#pragma mark - Animations
+
 - (void) addBounceAnimation
 {
-    CGFloat shrinkDuration = self.animationDuration * 0.3;
-    CGFloat growDuration = self.animationDuration * 0.7;
+    CGFloat delay = 1.2;
+    CGFloat shrinkDuration = (self.animationDuration - delay) * 0.3;
+    CGFloat growDuration = (self.animationDuration - delay) * 0.7;
     
-    [UIView animateWithDuration:shrinkDuration delay:0 usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:shrinkDuration delay:delay usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
         self.transform = scaleTransform;
     } completion:^(BOOL finished) {
