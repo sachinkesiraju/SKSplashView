@@ -111,6 +111,11 @@
 
 - (void)startAnimation;
 {
+    [self startAnimationWithCompletion:nil];
+}
+
+- (void)startAnimationWithCompletion:(void(^)())completionHandler
+{
     if(_splashIcon) {
         NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%f",self.animationDuration] forKey:@"animationDuration"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:dic];
@@ -143,6 +148,14 @@
         default:NSLog(@"No animation type selected");
             break;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"stopAnimation" object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif)
+    {
+        if(completionHandler) {
+            completionHandler();
+        }
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }];
 }
 
 - (void) startAnimationWhileExecuting:(NSURLRequest *)request withCompletion:(void (^)(NSData *, NSURLResponse *, NSError *))completion
@@ -157,7 +170,6 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil]; //remove animation on data retrieval
          [self removeSplashView];
          completion(data, response, error);
      }];
@@ -289,6 +301,7 @@
 - (void) removeSplashView
 {
     [self removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil];
     if([self.delegate respondsToSelector:@selector(splashViewDidEndAnimating:)]) {
         [self.delegate splashViewDidEndAnimating:self];
     }

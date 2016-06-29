@@ -92,7 +92,9 @@
     _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:[UIColor blackColor] animationType:SKSplashAnimationTypeFade];
     _splashView.animationDuration = 5;
     [self.view addSubview:_splashView];
-    [_splashView startAnimation];
+    [_splashView startAnimationWithCompletion:^{
+        NSLog(@"Splash animation complete");
+    }];
 }
 
 #pragma mark - Concurrent Network Animation

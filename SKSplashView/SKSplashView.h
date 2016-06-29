@@ -16,7 +16,6 @@
 @optional
 - (void) splashView: (SKSplashView *) splashView didBeginAnimatingWithDuration: (float) duration;
 - (void) splashViewDidEndAnimating: (SKSplashView *) splashView;
-
 @end
 
 typedef NS_ENUM(NSInteger, SKSplashAnimationType)
@@ -37,6 +36,7 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
 
 @property (weak, nonatomic) id <SKSplashDelegate> delegate;
 
+//Init splash view
 - (instancetype)initWithAnimationType: (SKSplashAnimationType) animationType;
 - (instancetype)initWithBackgroundColor: (UIColor *) backgroundColor animationType: (SKSplashAnimationType) animationType;
 - (instancetype)initWithBackgroundImage: (UIImage *) backgroundImage animationType: (SKSplashAnimationType) animationType;
@@ -46,7 +46,9 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
 
 - (void) setCustomAnimationType: (CAAnimation *) animation;
 
+//Start animation
 - (void)startAnimation;
-- (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion;
+- (void)startAnimationWithCompletion:(void(^)())completionHandler; //start animation with completion
+- (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion; //NOTE: Splash View returns regardless of whether request was success -> error handling highly recommended
 
 @end

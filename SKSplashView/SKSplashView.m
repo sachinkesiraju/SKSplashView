@@ -9,7 +9,7 @@
 #import "SKSplashView.h"
 #import "SKSplashIcon.h"
 
-@interface SKSplashView() <NSURLConnectionDataDelegate>
+@interface SKSplashView()
 
 @property (nonatomic, assign) SKSplashAnimationType animationType;
 @property (nonatomic, assign) SKSplashIcon *splashIcon;
@@ -19,7 +19,7 @@
 
 @implementation SKSplashView
 
-#pragma mark - Instance methods
+#pragma mark - Init
 
 - (instancetype)initWithAnimationType:(SKSplashAnimationType)animationType
 {
@@ -38,7 +38,7 @@
     if(self)
     {
         _backgroundViewColor = backgroundColor;
-        self.backgroundColor = [self setBackgroundViewColor];
+        self.backgroundColor = _backgroundViewColor;
         _animationType = animationType;
     }
     
@@ -67,7 +67,7 @@
     {
         _splashIcon = icon;
         _animationType = animationType;
-        self.backgroundColor = [self setBackgroundViewColor];
+        self.backgroundColor = _backgroundViewColor;
         icon.center = self.center;
         [self addSubview:icon];
     }
@@ -111,12 +111,17 @@
 
 - (void)startAnimation;
 {
+    [self startAnimationWithCompletion:nil];
+}
+
+- (void)startAnimationWithCompletion:(void(^)())completionHandler
+{
     if(_splashIcon) {
         NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%f",self.animationDuration] forKey:@"animationDuration"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:dic];
     }
-    if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)])
-    {
+    
+    if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)]) {
         [self.delegate splashView:self didBeginAnimatingWithDuration:self.animationDuration];
     }
     
@@ -138,16 +143,19 @@
             [self addNoAnimation];
             break;
         case SKSplashAnimationTypeCustom:
-            if(_animationType) {
-                [self addCustomAnimationWithAnimation:_customAnimation];
-            }
-            else {
-                [self addCustomAnimationWithAnimation:[self customAnimation]];
-            }
+            [self addCustomAnimationWithAnimation:_customAnimation];
             break;
         default:NSLog(@"No animation type selected");
             break;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"stopAnimation" object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif)
+    {
+        if(completionHandler) {
+            completionHandler();
+        }
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }];
 }
 
 - (void) startAnimationWhileExecuting:(NSURLRequest *)request withCompletion:(void (^)(NSData *, NSURLResponse *, NSError *))completion
@@ -156,14 +164,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:nil];
     }
     
-    if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)])
-    {
+    if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)]) {
         [self.delegate splashView:self didBeginAnimatingWithDuration:self.animationDuration];
     }
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil]; //remove animation on data retrieval
          [self removeSplashView];
          completion(data, response, error);
      }];
@@ -193,7 +199,7 @@
 
 - (CAAnimation *)customAnimation
 {
-    if (!_animationType) {
+    if (!_customAnimation) {
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
         animation.values = @[@1, @0.9, @300];
         animation.keyTimes = @[@0, @0.4, @1];
@@ -207,7 +213,7 @@
     return _customAnimation;
 }
 
-- (UIColor *) setBackgroundViewColor
+- (UIColor *) backgroundViewColor
 {
     if (!_backgroundViewColor) {
         _backgroundViewColor = [UIColor whiteColor];
@@ -295,13 +301,8 @@
 - (void) removeSplashView
 {
     [self removeFromSuperview];
-    [self endAnimating];
-}
-
-- (void) endAnimating
-{
-    if([self.delegate respondsToSelector:@selector(splashViewDidEndAnimating:)])
-    {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil];
+    if([self.delegate respondsToSelector:@selector(splashViewDidEndAnimating:)]) {
         [self.delegate splashViewDidEndAnimating:self];
     }
 }
