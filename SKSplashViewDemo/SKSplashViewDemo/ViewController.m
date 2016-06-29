@@ -89,6 +89,7 @@
 - (void) fadeExampleSplash
 {
     SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"white dot.png"] animationType:SKIconAnimationTypeBlink];
+    splashIcon.iconSize = CGSizeMake(100, 100);
     _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:[UIColor blackColor] animationType:SKSplashAnimationTypeFade];
     _splashView.animationDuration = 5;
     [self.view addSubview:_splashView];

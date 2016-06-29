@@ -65,12 +65,9 @@
     _customAnimation = animation;
 }
 
-- (CGSize)iconSize
+- (void) setIconSize:(CGSize)iconSize
 {
-    if (!_iconSize.height) {
-        _iconSize = CGSizeMake(60, 60);
-    }
-    return _iconSize;
+    self.frame = CGRectMake(0, 0, iconSize.width, iconSize.height);
 }
 
 - (UIColor *)iconColor
