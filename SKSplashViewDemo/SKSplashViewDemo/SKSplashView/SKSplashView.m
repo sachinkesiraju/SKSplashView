@@ -175,6 +175,11 @@
      }];
 }
 
+- (void) startAnimationWhenFinished:(NSOperationQueue *)queue
+{
+    [queue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
+}
+
 - (void) setCustomAnimationType:(CAAnimation *)animation
 {
     _customAnimation = animation;
@@ -304,6 +309,29 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil];
     if([self.delegate respondsToSelector:@selector(splashViewDidEndAnimating:)]) {
         [self.delegate splashViewDidEndAnimating:self];
+    }
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if ([object isKindOfClass:[NSOperationQueue class]] && [keyPath isEqualToString:@"operationCount"]) {
+        NSOperationQueue *queue = object;
+        if (queue.operationCount == 0) {
+            // Stat animation when queue has completed
+            if(_splashIcon) { //trigger splash icon animation
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:nil];
+            }
+            
+            if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)])
+            {
+                [self.delegate splashView:self didBeginAnimatingWithDuration:self.animationDuration];
+            }
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object
+                               change:change context:context];
     }
 }
 
