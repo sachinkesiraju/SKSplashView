@@ -23,8 +23,9 @@
 		03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563071A05713D003C6A7C /* snapchat icon.png */; };
 		03D5630D1A05713D003C6A7C /* twitter background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563081A05713D003C6A7C /* twitter background.png */; };
 		03D5630E1A05713D003C6A7C /* twitterIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563091A05713D003C6A7C /* twitterIcon.png */; };
-		03D563141A057160003C6A7C /* SKSplashIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D563111A057160003C6A7C /* SKSplashIcon.m */; };
-		03D563151A057160003C6A7C /* SKSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D563131A057160003C6A7C /* SKSplashView.m */; };
+		23D15EE41D25704B00D60556 /* twitterIcon_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 23D15EE31D25704B00D60556 /* twitterIcon_large.png */; };
+		23D15EEA1D25709D00D60556 /* SKSplashIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D15EE71D25709D00D60556 /* SKSplashIcon.m */; };
+		23D15EEB1D25709D00D60556 /* SKSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D15EE91D25709D00D60556 /* SKSplashView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +61,11 @@
 		03D563071A05713D003C6A7C /* snapchat icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snapchat icon.png"; sourceTree = "<group>"; };
 		03D563081A05713D003C6A7C /* twitter background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter background.png"; sourceTree = "<group>"; };
 		03D563091A05713D003C6A7C /* twitterIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterIcon.png; sourceTree = "<group>"; };
-		03D563101A057160003C6A7C /* SKSplashIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashIcon.h; sourceTree = "<group>"; };
-		03D563111A057160003C6A7C /* SKSplashIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSplashIcon.m; sourceTree = "<group>"; };
-		03D563121A057160003C6A7C /* SKSplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashView.h; sourceTree = "<group>"; };
-		03D563131A057160003C6A7C /* SKSplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSplashView.m; sourceTree = "<group>"; };
+		23D15EE31D25704B00D60556 /* twitterIcon_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterIcon_large.png; sourceTree = "<group>"; };
+		23D15EE61D25709D00D60556 /* SKSplashIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashIcon.h; sourceTree = "<group>"; };
+		23D15EE71D25709D00D60556 /* SKSplashIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSplashIcon.m; sourceTree = "<group>"; };
+		23D15EE81D25709D00D60556 /* SKSplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashView.h; sourceTree = "<group>"; };
+		23D15EE91D25709D00D60556 /* SKSplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSplashView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +109,10 @@
 			children = (
 				03D562DF1A0570EF003C6A7C /* AppDelegate.h */,
 				03D562E01A0570EF003C6A7C /* AppDelegate.m */,
-				03D5630F1A057160003C6A7C /* SKSplashView */,
 				03D562E51A0570EF003C6A7C /* Main.storyboard */,
 				03D563011A057112003C6A7C /* ViewController.h */,
 				03D563021A057112003C6A7C /* ViewController.m */,
+				23D15EE51D25709D00D60556 /* SKSplashView */,
 				03D563041A05713D003C6A7C /* Images */,
 				03D562E81A0570EF003C6A7C /* Images.xcassets */,
 				03D562EA1A0570EF003C6A7C /* LaunchScreen.xib */,
@@ -157,17 +159,18 @@
 				03D563071A05713D003C6A7C /* snapchat icon.png */,
 				03D563081A05713D003C6A7C /* twitter background.png */,
 				03D563091A05713D003C6A7C /* twitterIcon.png */,
+				23D15EE31D25704B00D60556 /* twitterIcon_large.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
 		};
-		03D5630F1A057160003C6A7C /* SKSplashView */ = {
+		23D15EE51D25709D00D60556 /* SKSplashView */ = {
 			isa = PBXGroup;
 			children = (
-				03D563101A057160003C6A7C /* SKSplashIcon.h */,
-				03D563111A057160003C6A7C /* SKSplashIcon.m */,
-				03D563121A057160003C6A7C /* SKSplashView.h */,
-				03D563131A057160003C6A7C /* SKSplashView.m */,
+				23D15EE61D25709D00D60556 /* SKSplashIcon.h */,
+				23D15EE71D25709D00D60556 /* SKSplashIcon.m */,
+				23D15EE81D25709D00D60556 /* SKSplashView.h */,
+				23D15EE91D25709D00D60556 /* SKSplashView.m */,
 			);
 			path = SKSplashView;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			files = (
 				032E70C31C294A4A004D4542 /* uber map screenshot.png in Resources */,
 				03D5630A1A05713D003C6A7C /* ping background.PNG in Resources */,
+				23D15EE41D25704B00D60556 /* twitterIcon_large.png in Resources */,
 				03D5630B1A05713D003C6A7C /* ping.png in Resources */,
 				03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */,
 				03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */,
@@ -281,11 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03D563151A057160003C6A7C /* SKSplashView.m in Sources */,
+				23D15EEB1D25709D00D60556 /* SKSplashView.m in Sources */,
 				03D563031A057112003C6A7C /* ViewController.m in Sources */,
 				03D562E11A0570EF003C6A7C /* AppDelegate.m in Sources */,
 				03D562DE1A0570EF003C6A7C /* main.m in Sources */,
-				03D563141A057160003C6A7C /* SKSplashIcon.m in Sources */,
+				23D15EEA1D25709D00D60556 /* SKSplashIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
