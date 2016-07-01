@@ -28,6 +28,11 @@ SKSplashView *splashView = [[SKSplashView alloc] initWithBackgroundColor:[UIColo
 splashView.animationDuration = 3.0f; //Set the animation duration (Default: 1s)
 [self.view addSubview:splashView]; //Add the splash view to your current view
 [splashView startAnimation]; //Call this method to start the splash animation
+
+//Or alternatively, start the animation with a callback
+[splashView startAnimationWithCompletion:^{ 
+   NSLog(@"Splash animation complete");
+}];
 ```
 The SplashView can also be initialized with the following methods:
 ```
@@ -110,14 +115,14 @@ To do this:
 - Add the following methods to listen to updates
 ```
 - (void) splashView:(SKSplashView *)splashView didBeginAnimatingWithDuration:(float)duration
-    {
-        NSLog(@"Splash view started animating with duration %f", duration);
-    }
+{
+  NSLog(@"Splash view started animating with duration %f", duration);
+}
 
 - (void) splashViewDidEndAnimating:(SKSplashView *)splashView
-    {
-        NSLog(@"Splash view stopped animating");
-    }
+{
+  NSLog(@"Splash view stopped animating");
+}
 ```
 <h1> Special Feature </h1>
 SKSplashView also allows you to run a splash animation while executing a network request. This is ideal in situations where your app takes time during launch to download necessary data.
