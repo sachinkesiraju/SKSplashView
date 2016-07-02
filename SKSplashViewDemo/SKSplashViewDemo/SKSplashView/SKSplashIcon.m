@@ -15,6 +15,7 @@
 @property (nonatomic) CGFloat animationDuration;
 @property (nonatomic) BOOL indefiniteAnimation;
 @property (strong, nonatomic) UIImage *iconImage;
+@property (nonatomic) CGSize initialSize;
 
 @end
 
@@ -28,6 +29,7 @@
 {
     self = [super init];
     if(self) {
+        _initialSize = iconImage.size;
         self.image = iconImage;
         self.tintColor = _iconColor;
         self.contentMode = UIViewContentModeScaleAspectFit;
@@ -44,11 +46,31 @@
     if(self) {
         _animationType = animationType;
         _iconImage = iconImage;
+        _initialSize = iconImage.size;
         self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.image = iconImage;
         self.tintColor = _iconColor;
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
+        [self addObserverForAnimationNotification];
+    }
+    
+    return self;
+}
+
+- (instancetype) initWithImage:(UIImage *)iconImage initialSize:(CGSize)initialSize animationType:(SKIconAnimationType)animationType
+{
+    self = [super init];
+    if(self)
+    {
+        _animationType = animationType;
+        _iconImage = iconImage;
+        _initialSize = initialSize;
+        self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.image = iconImage;
+        self.tintColor = _iconColor;
+        self.contentMode = UIViewContentModeScaleAspectFit;
+        self.frame =  CGRectMake(0, 0, _initialSize.width, _initialSize.height);
         [self addObserverForAnimationNotification];
     }
     
@@ -141,18 +163,22 @@
 
 - (void) addBounceAnimation
 {
-    CGFloat delay = 1.2;
-    CGFloat shrinkDuration = (self.animationDuration - delay) * 0.3;
-    CGFloat growDuration = (self.animationDuration - delay) * 0.7;
+    CGFloat shrinkDuration = self.animationDuration * 0.6;
+    CGFloat growDuration = self.animationDuration * 0.4;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    CGFloat scaleX = width / self.initialSize.width;
+    CGFloat scaleY = height / self.initialSize.height;
+    CGFloat minScale = MIN(scaleX,scaleY);
+    printf("%f", minScale);
     
-    [UIView animateWithDuration:shrinkDuration delay:delay usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
+    [UIView animateWithDuration:shrinkDuration delay:0 usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.90, 0.90);
         self.transform = scaleTransform;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:growDuration animations:^{
-            CGAffineTransform scaleTransform = CGAffineTransformMakeScale(20, 20);
+            CGAffineTransform scaleTransform = CGAffineTransformMakeScale(minScale, minScale);
             self.transform = scaleTransform;
-            self.alpha = 0;
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];

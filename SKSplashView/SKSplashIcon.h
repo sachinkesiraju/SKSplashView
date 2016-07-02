@@ -24,10 +24,12 @@ typedef NS_ENUM(NSInteger, SKIconAnimationType)
 @interface SKSplashIcon : UIImageView
 
 @property (strong, nonatomic) UIColor *iconColor; //Default: white
-@property (nonatomic, assign) CGSize iconSize; //Default: 60x60
+@property (nonatomic, assign) CGSize iconSize;
 
 - (instancetype) initWithImage: (UIImage *) iconImage;
 - (instancetype) initWithImage: (UIImage *) iconImage animationType: (SKIconAnimationType) animationType;
+- (instancetype) initWithImage: (UIImage *) iconImage initialSize:(CGSize)initialSize animationType: (SKIconAnimationType) animationType;
+
 
 - (void) setIconAnimationType: (SKIconAnimationType) animationType;
 - (void) setCustomAnimation: (CAAnimation *) animation;
