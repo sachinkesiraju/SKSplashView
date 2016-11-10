@@ -28,37 +28,21 @@ SKSplashView *splashView = [[SKSplashView alloc] initWithBackgroundColor:[UIColo
 splashView.animationDuration = 3.0f; //Set the animation duration (Default: 1s)
 [self.view addSubview:splashView]; //Add the splash view to your current view
 [splashView startAnimation]; //Call this method to start the splash animation
-
-//Or alternatively, start the animation with a callback
-[splashView startAnimationWithCompletion:^{ 
-   NSLog(@"Splash animation complete");
-}];
-```
-The SplashView can also be initialized with the following methods:
-```
-- (instancetype)initWithAnimationType: (SKSplashAnimationType) animationType;
-- (instancetype)initWithBackgroundColor: (UIColor *) backgroundColor animationType: (SKSplashAnimationType) animationType;
-- (instancetype)initWithBackgroundImage: (UIImage *) backgroundImage animationType: (SKSplashAnimationType) animationType;
-- (instancetype)initWithSplashIcon: (SKSplashIcon *)icon animationType: (SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundColor: (UIColor *) backgroundColor animationType:(SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundImage:(UIImage *) backgroundImage animationType:(SKSplashAnimationType) animationType;
 ```
 
 <h4> Customizability </h4>
 The appearance of the splash view can be customized with the following properties:
 ```
-@property (strong, nonatomic) UIColor *backgroundViewColor; //Sets the background color of the splash view (Default: white)
 @property (strong, nonatomic) UIImage *backgroundImage; //Sets a background image to the splash view
 @property (nonatomic, assign) CGFloat animationDuration; //Sets the duration of the splash view
 ```
-The Splash view also allows you to customize the animation transition of the splash view  with the following types:
+The splash view also allows you to customize the animation transition of the splash view  with the following types:
 ```
     SKSplashAnimationTypeFade,
     SKSplashAnimationTypeBounce,
     SKSplashAnimationTypeShrink,
     SKSplashAnimationTypeZoom,
-    SKSplashAnimationTypeNone,
-    SKSplashAnimationTypeCustom
+    SKSplashAnimationTypeNone
 ```
 
 <h2> SKSplashIcon </h2>
@@ -69,7 +53,7 @@ To add a splash icon to your splash view:
 
 1. `#import "SKSplashIcon.h"` in the view you are presenting the splash view
 
-2. Initialize the splash view as follows:
+2. Initialize the splash icon as follows:
   ```
   SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"test.png"] animationType:SKIconAnimationTypeNone]; 
   //Initialize with the customizability option of your choice. See Customizability for more.
@@ -79,13 +63,6 @@ To add a splash icon to your splash view:
   ```
   SKSplashView *splashView = [SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:splashColor animationType:SKSplashAnimationTypeFade];
   ```
-
-You can also add the splash icon when initializing the splash view with the following methods:
-```
-- (instancetype)initWithSplashIcon: (SKSplashIcon *)icon animationType: (SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundColor: (UIColor *) backgroundColor animationType:(SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundImage:(UIImage *) backgroundImage animationType:(SKSplashAnimationType) animationType;
-```
 
 <h4> Customizability </h4>
 
@@ -102,8 +79,7 @@ The animation of the splash icon can also be customized with the following anima
     SKIconAnimationTypeFade,
     SKIconAnimationTypePing,
     SKIconAnimationTypeBlink,
-    SKIconAnimationTypeNone,
-    SKIconAnimationTypeCustom
+    SKIconAnimationTypeNone
 ```
 
 <h1> Delegate </h1> 
