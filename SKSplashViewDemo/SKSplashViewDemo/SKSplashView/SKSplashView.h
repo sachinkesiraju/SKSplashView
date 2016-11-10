@@ -24,13 +24,11 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
     SKSplashAnimationTypeBounce,
     SKSplashAnimationTypeShrink,
     SKSplashAnimationTypeZoom,
-    SKSplashAnimationTypeNone,
-    SKSplashAnimationTypeCustom
+    SKSplashAnimationTypeNone
 };
 
 @interface SKSplashView : UIView
 
-@property (strong, nonatomic) UIColor *backgroundViewColor; //Default: white
 @property (strong, nonatomic) UIImage *backgroundImage;
 @property (nonatomic, assign) CGFloat animationDuration; //Default: 1s
 
@@ -38,17 +36,10 @@ typedef NS_ENUM(NSInteger, SKSplashAnimationType)
 
 //Init splash view
 - (instancetype)initWithAnimationType: (SKSplashAnimationType) animationType;
-- (instancetype)initWithBackgroundColor: (UIColor *) backgroundColor animationType: (SKSplashAnimationType) animationType;
-- (instancetype)initWithBackgroundImage: (UIImage *) backgroundImage animationType: (SKSplashAnimationType) animationType;
 - (instancetype)initWithSplashIcon: (SKSplashIcon *)icon animationType: (SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundColor: (UIColor *) backgroundColor animationType:(SKSplashAnimationType) animationType;
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundImage:(UIImage *) backgroundImage animationType:(SKSplashAnimationType) animationType;
-
-- (void) setCustomAnimationType: (CAAnimation *) animation;
 
 //Start animation
 - (void)startAnimation;
-- (void)startAnimationWithCompletion:(void(^)())completionHandler; //start animation with completion
 - (void)startAnimationWhileExecuting: (NSURLRequest *) request withCompletion:(void(^)(NSData *data, NSURLResponse *response, NSError *error)) completion; //NOTE: Splash View returns regardless of whether request was success -> error handling highly recommended
 
 @end

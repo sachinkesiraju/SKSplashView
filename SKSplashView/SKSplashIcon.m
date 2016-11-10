@@ -11,10 +11,8 @@
 @interface SKSplashIcon()
 
 @property (nonatomic, assign) SKIconAnimationType animationType;
-@property (strong, nonatomic) CAAnimation *customAnimation;
-@property (nonatomic) CGFloat animationDuration;
-@property (nonatomic) BOOL indefiniteAnimation;
-@property (strong, nonatomic) UIImage *iconImage;
+@property (nonatomic, assign, readonly) CGFloat animationDuration;
+@property (nonatomic) BOOL shouldAnimateIndefinitely;
 
 @end
 
@@ -29,79 +27,44 @@
     self = [super init];
     if(self) {
         self.image = iconImage;
-        self.tintColor = _iconColor;
         self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
-        [self addObserverForAnimationNotification];
+        _iconSize = CGSizeMake(60, 60);
+        self.frame = CGRectMake(0, 0, _iconSize.width, _iconSize.height);
     }
-    
     return self;
 }
 
 - (instancetype) initWithImage:(UIImage *)iconImage animationType:(SKIconAnimationType)animationType
 {
-    self = [super init];
+    self = [self initWithImage:iconImage];
     if(self) {
         _animationType = animationType;
-        _iconImage = iconImage;
-        self.image = [iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.image = iconImage;
-        self.tintColor = _iconColor;
-        self.contentMode = UIViewContentModeScaleAspectFit;
-        self.frame = CGRectMake(0, 0, iconImage.size.width, iconImage.size.height);
-        [self addObserverForAnimationNotification];
     }
-    
     return self;
 }
 
-- (void) setIconAnimationType:(SKIconAnimationType)animationType
-{
-    _animationType = animationType;
-}
-
-- (void) setCustomAnimation:(CAAnimation *)animation
-{
-    _customAnimation = animation;
-}
+#pragma mark - Setters
 
 - (void) setIconSize:(CGSize)iconSize
 {
-    self.frame = CGRectMake(0, 0, iconSize.width, iconSize.height);
-}
-
-- (UIColor *)iconColor
-{
-    if (!_iconColor) {
-        _iconColor = [UIColor whiteColor];
-    }
-    return _iconColor;
+    [self setFrame:CGRectMake(0, 0, iconSize.width, iconSize.height)];
 }
 
 #pragma mark - Implementation
 
-- (void) addObserverForAnimationNotification
+- (void) splashIconAnimateWithDuration:(CGFloat)animationDuration indefinitely:(BOOL)shouldAnimateIndefinitely
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"startAnimation" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"stopAnimation" object:nil];
+    self.animationDuration = animationDuration;
+    [self startAnimation];
+    if (shouldAnimateIndefinitely) {
+        self.shouldAnimateIndefinitely = shouldAnimateIndefinitely;
+    }
 }
 
-- (void) receiveNotification: (NSNotification *) notification
+- (void) splashIconStopAnimating
 {
-    if([notification.name isEqualToString:@"startAnimation"]) { //if start animation, set duration if any
-        if(notification.userInfo [@"animationDuration"]){
-            double duration = [notification.userInfo [@"animationDuration"] doubleValue];
-            self.animationDuration = duration;
-            [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
-        }
-        else {
-            self.indefiniteAnimation = YES;
-        }
-        [self startAnimation];
-    }
-    else if([notification.name isEqualToString:@"stopAnimation"]) {
-        [self removeAnimations];
-    }
+    self.shouldAnimateIndefinitely = NO;
+    [self removeAnimations];
 }
 
 - (void) startAnimation
@@ -129,9 +92,6 @@
         case SKIconAnimationTypeNone:
             [self addNoAnimation];
             break;
-        case SKIconAnimationTypeCustom:
-            [self addCustomAnimation:_customAnimation];
-            break;
         default:NSLog(@"No animation type selected");
             break;
     }
@@ -143,7 +103,7 @@
 {
     CGFloat delay = 1.2;
     CGFloat shrinkDuration = (self.animationDuration - delay) * 0.3;
-    CGFloat growDuration = (self.animationDuration - delay) * 0.7;
+    CGFloat growDuration = (self.animationDuration - delay) - shrinkDuration;
     
     [UIView animateWithDuration:shrinkDuration delay:delay usingSpringWithDamping:0.7f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.75, 0.75);
@@ -162,7 +122,6 @@
 - (void) addFadeAnimation
 {
     [UIView animateWithDuration:self.animationDuration animations:^{
-        self.image = _iconImage;
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
@@ -203,8 +162,8 @@
          }];
      }];
     
-    if(self.indefiniteAnimation){ //keep running animation indefinitely
-        [self performSelectorOnMainThread:@selector(addPingAnimation) withObject:nil waitUntilDone:NO];
+    if (_shouldAnimateIndefinitely) {
+        [self performSelectorOnMainThread:@selector(addPingAnimation) withObject:self waitUntilDone:NO];
     }
 }
 
@@ -220,27 +179,19 @@
          }];
      }];
     
-    if(self.indefiniteAnimation){ //keep running animation indefinitely
-        [self performSelectorOnMainThread:@selector(addBlinkAnimation) withObject:nil waitUntilDone:NO];
+    if (_shouldAnimateIndefinitely) {
+        [self performSelectorOnMainThread:@selector(addBlinkAnimation) withObject:self waitUntilDone:NO];
     }
 }
 
 - (void) removeAnimations
 {
     [self.layer removeAllAnimations];
-    self.indefiniteAnimation = NO;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
 
 - (void) addNoAnimation
 {
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
-}
-
-- (void) addCustomAnimation: (CAAnimation *) animation
-{
-    [self.layer addAnimation:animation forKey:@"SKSplashAnimation"];
     [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeAnimations) userInfo:nil repeats:YES];
 }
 

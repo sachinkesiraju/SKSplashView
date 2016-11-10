@@ -24,85 +24,19 @@
 - (instancetype)initWithAnimationType:(SKSplashAnimationType)animationType
 {
     self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
+    if(self) {
         _animationType = animationType;
     }
-    
-    return self;
-}
-
-- (instancetype) initWithBackgroundColor:(UIColor *)backgroundColor animationType:(SKSplashAnimationType)animationType
-{
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
-        _backgroundViewColor = backgroundColor;
-        self.backgroundColor = _backgroundViewColor;
-        _animationType = animationType;
-    }
-    
-    return self;
-}
-
-- (instancetype) initWithBackgroundImage:(UIImage *)backgroundImage animationType:(SKSplashAnimationType)animationType
-{
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
-        _backgroundImage = backgroundImage;
-        _animationType = animationType;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        imageView.frame = self.bounds;
-        [self addSubview:imageView];
-    }
-    
     return self;
 }
 
 - (instancetype) initWithSplashIcon:(SKSplashIcon *)icon animationType:(SKSplashAnimationType)animationType
 {
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
+    self = [self initWithAnimationType:animationType];
+    if(self) {
         _splashIcon = icon;
-        _animationType = animationType;
-        self.backgroundColor = _backgroundViewColor;
         icon.center = self.center;
         [self addSubview:icon];
-    }
-    
-    return self;
-}
-
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundColor:(UIColor *)backgroundColor animationType:(SKSplashAnimationType)animationType
-{
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
-        _splashIcon = icon;
-        _backgroundViewColor = backgroundColor;
-        _animationType = animationType;
-        icon.center = self.center;
-        self.backgroundColor = _backgroundViewColor;
-        [self addSubview:icon];
-    }
-    return self;
-}
-
-- (instancetype) initWithSplashIcon:(SKSplashIcon *)icon backgroundImage:(UIImage *)backgroundImage animationType:(SKSplashAnimationType)animationType
-{
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if(self)
-    {
-        _splashIcon = icon;
-        _backgroundImage = backgroundImage;
-        _animationType = animationType;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        imageView.frame = self.bounds;
-        [self addSubview:imageView];
-        [self addSubview:icon];
-        icon.center = imageView.center;
     }
     return self;
 }
@@ -111,14 +45,8 @@
 
 - (void)startAnimation;
 {
-    [self startAnimationWithCompletion:nil];
-}
-
-- (void)startAnimationWithCompletion:(void(^)())completionHandler
-{
     if(_splashIcon) {
-        NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%f",self.animationDuration] forKey:@"animationDuration"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:dic];
+        [_splashIcon splashIconAnimateWithDuration:self.animationDuration indefinitely:NO];
     }
     
     if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)]) {
@@ -142,26 +70,16 @@
         case SKSplashAnimationTypeNone:
             [self addNoAnimation];
             break;
-        case SKSplashAnimationTypeCustom:
-            [self addCustomAnimationWithAnimation:_customAnimation];
-            break;
-        default:NSLog(@"No animation type selected");
+        default: NSLog(@"No animation type selected");
             break;
     }
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"stopAnimation" object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif)
-    {
-        if(completionHandler) {
-            completionHandler();
-        }
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }];
 }
 
 - (void) startAnimationWhileExecuting:(NSURLRequest *)request withCompletion:(void (^)(NSData *, NSURLResponse *, NSError *))completion
 {
+    [self startAnimation];
     if(_splashIcon) { //trigger splash icon animation
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"startAnimation" object:self userInfo:nil];
+        [_splashIcon splashIconAnimateWithDuration:0 indefinitely:YES];
     }
     
     if([self.delegate respondsToSelector:@selector(splashView:didBeginAnimatingWithDuration:)]) {
@@ -175,10 +93,7 @@
      }];
 }
 
-- (void) setCustomAnimationType:(CAAnimation *)animation
-{
-    _customAnimation = animation;
-}
+#pragma mark - Property setters
 
 - (void) setBackgroundImage:(UIImage *)backgroundImage
 {
@@ -187,38 +102,12 @@
     [self addSubview:imageView];
 }
 
-#pragma mark - Property setters
-
 - (CGFloat)animationDuration
 {
     if (!_animationDuration) {
         _animationDuration = 1.0f;
     }
     return _animationDuration;
-}
-
-- (CAAnimation *)customAnimation
-{
-    if (!_customAnimation) {
-        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-        animation.values = @[@1, @0.9, @300];
-        animation.keyTimes = @[@0, @0.4, @1];
-        animation.duration = self.animationDuration;
-        animation.removedOnCompletion = NO;
-        animation.fillMode = kCAFillModeForwards;
-        animation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
-        _customAnimation = animation;
-    }
-    return _customAnimation;
-}
-
-- (UIColor *) backgroundViewColor
-{
-    if (!_backgroundViewColor) {
-        _backgroundViewColor = [UIColor whiteColor];
-    }
-    return _backgroundViewColor;
 }
 
 #pragma mark - Animations
@@ -292,16 +181,13 @@
     [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeSplashView) userInfo:nil repeats:NO];
 }
 
-- (void) addCustomAnimationWithAnimation: (CAAnimation *) animation
-{
-    [self.layer addAnimation:animation forKey:@"SKSplashAnimation"];
-    [NSTimer scheduledTimerWithTimeInterval:self.animationDuration target:self selector:@selector(removeSplashView) userInfo:nil repeats:YES];
-}
-
 - (void) removeSplashView
 {
     [self removeFromSuperview];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimation" object:self userInfo:nil];
+    if (_splashIcon) {
+        [_splashIcon splashIconStopAnimating];
+    }
+    
     if([self.delegate respondsToSelector:@selector(splashViewDidEndAnimating:)]) {
         [self.delegate splashViewDidEndAnimating:self];
     }

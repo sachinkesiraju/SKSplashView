@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032E70BD1C2945A2004D4542 /* uber screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70BC1C2945A2004D4542 /* uber screen.png */; };
-		032E70BF1C29465D004D4542 /* uber ping.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70BE1C29465D004D4542 /* uber ping.png */; };
-		032E70C31C294A4A004D4542 /* uber map screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 032E70C21C294A4A004D4542 /* uber map screenshot.png */; };
-		033B09B81A24F7220067C24C /* white dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 033B09B71A24F7220067C24C /* white dot.png */; };
 		03D562DE1A0570EF003C6A7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562DD1A0570EF003C6A7C /* main.m */; };
 		03D562E11A0570EF003C6A7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562E01A0570EF003C6A7C /* AppDelegate.m */; };
 		03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D562E51A0570EF003C6A7C /* Main.storyboard */; };
@@ -18,11 +14,6 @@
 		03D562EC1A0570EF003C6A7C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D562EA1A0570EF003C6A7C /* LaunchScreen.xib */; };
 		03D562F81A0570EF003C6A7C /* SKSplashViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D562F71A0570EF003C6A7C /* SKSplashViewDemoTests.m */; };
 		03D563031A057112003C6A7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D563021A057112003C6A7C /* ViewController.m */; };
-		03D5630A1A05713D003C6A7C /* ping background.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 03D563051A05713D003C6A7C /* ping background.PNG */; };
-		03D5630B1A05713D003C6A7C /* ping.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563061A05713D003C6A7C /* ping.png */; };
-		03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563071A05713D003C6A7C /* snapchat icon.png */; };
-		03D5630D1A05713D003C6A7C /* twitter background.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563081A05713D003C6A7C /* twitter background.png */; };
-		03D5630E1A05713D003C6A7C /* twitterIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D563091A05713D003C6A7C /* twitterIcon.png */; };
 		03D563141A057160003C6A7C /* SKSplashIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D563111A057160003C6A7C /* SKSplashIcon.m */; };
 		03D563151A057160003C6A7C /* SKSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D563131A057160003C6A7C /* SKSplashView.m */; };
 /* End PBXBuildFile section */
@@ -38,10 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		032E70BC1C2945A2004D4542 /* uber screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber screen.png"; sourceTree = "<group>"; };
-		032E70BE1C29465D004D4542 /* uber ping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber ping.png"; sourceTree = "<group>"; };
-		032E70C21C294A4A004D4542 /* uber map screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uber map screenshot.png"; sourceTree = "<group>"; };
-		033B09B71A24F7220067C24C /* white dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white dot.png"; sourceTree = "<group>"; };
 		03D562D81A0570EF003C6A7C /* SKSplashViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKSplashViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D562DC1A0570EF003C6A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03D562DD1A0570EF003C6A7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -55,11 +42,6 @@
 		03D562F71A0570EF003C6A7C /* SKSplashViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKSplashViewDemoTests.m; sourceTree = "<group>"; };
 		03D563011A057112003C6A7C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		03D563021A057112003C6A7C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		03D563051A05713D003C6A7C /* ping background.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ping background.PNG"; sourceTree = "<group>"; };
-		03D563061A05713D003C6A7C /* ping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ping.png; sourceTree = "<group>"; };
-		03D563071A05713D003C6A7C /* snapchat icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snapchat icon.png"; sourceTree = "<group>"; };
-		03D563081A05713D003C6A7C /* twitter background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter background.png"; sourceTree = "<group>"; };
-		03D563091A05713D003C6A7C /* twitterIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterIcon.png; sourceTree = "<group>"; };
 		03D563101A057160003C6A7C /* SKSplashIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashIcon.h; sourceTree = "<group>"; };
 		03D563111A057160003C6A7C /* SKSplashIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSplashIcon.m; sourceTree = "<group>"; };
 		03D563121A057160003C6A7C /* SKSplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSplashView.h; sourceTree = "<group>"; };
@@ -111,7 +93,6 @@
 				03D562E51A0570EF003C6A7C /* Main.storyboard */,
 				03D563011A057112003C6A7C /* ViewController.h */,
 				03D563021A057112003C6A7C /* ViewController.m */,
-				03D563041A05713D003C6A7C /* Images */,
 				03D562E81A0570EF003C6A7C /* Images.xcassets */,
 				03D562EA1A0570EF003C6A7C /* LaunchScreen.xib */,
 				03D562DB1A0570EF003C6A7C /* Supporting Files */,
@@ -143,22 +124,6 @@
 				03D562F61A0570EF003C6A7C /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		03D563041A05713D003C6A7C /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				032E70C21C294A4A004D4542 /* uber map screenshot.png */,
-				032E70BC1C2945A2004D4542 /* uber screen.png */,
-				033B09B71A24F7220067C24C /* white dot.png */,
-				032E70BE1C29465D004D4542 /* uber ping.png */,
-				03D563051A05713D003C6A7C /* ping background.PNG */,
-				03D563061A05713D003C6A7C /* ping.png */,
-				03D563071A05713D003C6A7C /* snapchat icon.png */,
-				03D563081A05713D003C6A7C /* twitter background.png */,
-				03D563091A05713D003C6A7C /* twitterIcon.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		03D5630F1A057160003C6A7C /* SKSplashView */ = {
@@ -252,18 +217,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				032E70C31C294A4A004D4542 /* uber map screenshot.png in Resources */,
-				03D5630A1A05713D003C6A7C /* ping background.PNG in Resources */,
-				03D5630B1A05713D003C6A7C /* ping.png in Resources */,
 				03D562E71A0570EF003C6A7C /* Main.storyboard in Resources */,
-				03D5630C1A05713D003C6A7C /* snapchat icon.png in Resources */,
 				03D562EC1A0570EF003C6A7C /* LaunchScreen.xib in Resources */,
-				033B09B81A24F7220067C24C /* white dot.png in Resources */,
-				032E70BD1C2945A2004D4542 /* uber screen.png in Resources */,
 				03D562E91A0570EF003C6A7C /* Images.xcassets in Resources */,
-				03D5630E1A05713D003C6A7C /* twitterIcon.png in Resources */,
-				03D5630D1A05713D003C6A7C /* twitter background.png in Resources */,
-				032E70BF1C29465D004D4542 /* uber ping.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -397,7 +353,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

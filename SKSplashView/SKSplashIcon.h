@@ -17,11 +17,10 @@ typedef NS_ENUM(NSInteger, SKIconAnimationType)
     SKIconAnimationTypeFade,
     SKIconAnimationTypePing, //supports network dependent animation
     SKIconAnimationTypeBlink, //supports network dependent animation
-    SKIconAnimationTypeNone,
-    SKIconAnimationTypeCustom
+    SKIconAnimationTypeNone
 };
 
-@interface SKSplashIcon : UIImageView
+@interface SKSplashIcon : UIImageView <SKSplashDelegate>
 
 @property (strong, nonatomic) UIColor *iconColor; //Default: white
 @property (nonatomic, assign) CGSize iconSize; //Default: 60x60
@@ -29,7 +28,7 @@ typedef NS_ENUM(NSInteger, SKIconAnimationType)
 - (instancetype) initWithImage: (UIImage *) iconImage;
 - (instancetype) initWithImage: (UIImage *) iconImage animationType: (SKIconAnimationType) animationType;
 
-- (void) setIconAnimationType: (SKIconAnimationType) animationType;
-- (void) setCustomAnimation: (CAAnimation *) animation;
+- (void) splashIconAnimateWithDuration:(CGFloat) animationDuration indefinitely:(BOOL) shouldAnimateIndefinitely;
+- (void) splashIconStopAnimating;
 
 @end

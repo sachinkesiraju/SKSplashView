@@ -24,8 +24,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
     //Call the splash view example method to view the demo
-    [self twitterSplash];
-    //[self uberAnimation]; //make sure you don't call two animation splashes at once
+    //[self twitterSplash];
+    [self pingSplash]; //make sure you don't call two animation splashes at once
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +39,8 @@
 {
     //Adding splash view
     UIColor *customColor = [UIColor colorWithRed:168.0f/255.0f green:36.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
-    _splashView = [[SKSplashView alloc] initWithBackgroundColor:customColor animationType:SKSplashAnimationTypeZoom];
+    _splashView = [[SKSplashView alloc] initWithAnimationType: SKSplashAnimationTypeZoom];
+    _splashView.backgroundColor = customColor;
     _splashView.animationDuration = 3.0f;
     _splashView.delegate = self;
     //Adding activity indicator view on splash view
@@ -59,11 +60,12 @@
     imageView.image = [UIImage imageNamed:@"twitter background.png"];
     [self.view addSubview:imageView];
     //Twitter style splash
-    SKSplashIcon *twitterSplashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"twitterIcon.png"] animationType:SKIconAnimationTypeBounce];
+    SKSplashIcon *twitterSplashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"twitter icon.png"] animationType:SKIconAnimationTypeBounce];
     UIColor *twitterColor = [UIColor colorWithRed:0.25098 green:0.6 blue:1.0 alpha:1.0];
-    _splashView = [[SKSplashView alloc] initWithSplashIcon:twitterSplashIcon backgroundColor:twitterColor animationType:SKSplashAnimationTypeNone];
+    _splashView = [[SKSplashView alloc] initWithSplashIcon:twitterSplashIcon animationType:SKSplashAnimationTypeNone];
     _splashView.delegate = self; //Optional -> if you want to receive updates on animation beginning/end
-    _splashView.animationDuration = 3.2; //Optional -> set animation duration. Default: 1s
+    _splashView.backgroundColor = twitterColor;
+    _splashView.animationDuration = 2.5; //Optional -> set animation duration. Default: 1s
     [self.view addSubview:_splashView];
     [_splashView startAnimation];
 }
@@ -78,7 +80,8 @@
     [self.view addSubview:imageView];
     //Ping style splash
     SKSplashIcon *pingSplashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"ping.png"] animationType:SKIconAnimationTypePing];
-    _splashView = [[SKSplashView alloc] initWithSplashIcon:pingSplashIcon backgroundColor:[UIColor whiteColor] animationType:SKSplashAnimationTypeBounce];
+    _splashView = [[SKSplashView alloc] initWithSplashIcon:pingSplashIcon animationType:SKSplashAnimationTypeBounce];
+    _splashView.backgroundColor = [UIColor whiteColor];
     _splashView.animationDuration = 5.0f;
     [self.view addSubview:_splashView];
     [_splashView startAnimation];
@@ -90,12 +93,11 @@
 {
     SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"white dot.png"] animationType:SKIconAnimationTypeBlink];
     splashIcon.iconSize = CGSizeMake(100, 100);
-    _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundColor:[UIColor blackColor] animationType:SKSplashAnimationTypeFade];
+    _splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon animationType:SKSplashAnimationTypeFade];
+    _splashView.backgroundColor = [UIColor blackColor];
     _splashView.animationDuration = 5;
     [self.view addSubview:_splashView];
-    [_splashView startAnimationWithCompletion:^{
-        NSLog(@"Splash animation complete");
-    }];
+    [_splashView startAnimation];
 }
 
 #pragma mark - Concurrent Network Animation
@@ -106,7 +108,8 @@
     imageView.frame = self.view.frame;
     [self.view addSubview:imageView]; //add background
     SKSplashIcon *splashIcon = [[SKSplashIcon alloc] initWithImage:[UIImage imageNamed:@"uber ping.png"] animationType:SKIconAnimationTypePing];
-    SKSplashView *splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon backgroundImage:[UIImage imageNamed:@"uber screen.png"] animationType:SKSplashAnimationTypeNone];
+    SKSplashView *splashView = [[SKSplashView alloc] initWithSplashIcon:splashIcon animationType:SKSplashAnimationTypeNone];
+    splashView.backgroundImage = [UIImage imageNamed:@"uber screen.png"];
     [self.view addSubview:splashView];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.usda.gov/data.json"]]; //replace with url you want to download data for launch from
     [splashView startAnimationWhileExecuting:request withCompletion:^(NSData *data, NSURLResponse *response, NSError *error)
